@@ -16,7 +16,10 @@ class SignupVC: UIViewController {
     @IBOutlet var nameText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+<<<<<<< HEAD
         
+=======
+>>>>>>> b23d88244e93a60c0fe2d6a030907730916e606d
     }
     func simpleAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -27,7 +30,11 @@ class SignupVC: UIViewController {
     
     
     @IBAction func touchUpSignUp(_ sender: Any) {
+<<<<<<< HEAD
         
+=======
+        dismiss(animated: true, completion: nil)
+>>>>>>> b23d88244e93a60c0fe2d6a030907730916e606d
         
         guard let email = emailText.text,
               let password = passwordText.text,
@@ -37,6 +44,7 @@ class SignupVC: UIViewController {
         AuthService.shared.signUp(email: email, password: password, username:userName) { (NetworkResult) in
             switch NetworkResult{
             case .success(let data) :
+<<<<<<< HEAD
                 if let signUpData = data as? SignupData {
                     UserDefaults.standard.set(signUpData.userName, forKey: "userName")
                 }
@@ -53,6 +61,19 @@ class SignupVC: UIViewController {
                     return
                 }
                 print("requestErr")
+=======
+                if let data = data as? SignupData{
+                    self.simpleAlert(title: "회원 가입 성공", message: "\(data)님 회원 가입 성공!")
+                    UserDefaults.standard.set(data.userName, forKey: "userName")
+                }
+                print("success")
+            case .requestNullValues:
+                self.simpleAlert(title: "회원 가입 실패", message: "이미 존재하는 이메일 입니다.")
+            
+            case .serverErr:
+                print("serverErr")
+                
+>>>>>>> b23d88244e93a60c0fe2d6a030907730916e606d
             default:
                 print("default")
             }
